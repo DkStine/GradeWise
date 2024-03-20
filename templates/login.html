@@ -1,0 +1,48 @@
+<!-- templates/login.html-->
+
+<html>
+
+<head>
+	<title>Handling of http get and post request</title>
+	<style>
+		div {
+			width: 400px;
+			border: 1px solid green;
+			padding: 10px;
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<h1>Handle GET Request</h1>
+		<form method="GET"
+			action="{{ url_for('handle_get') }}">
+			<input type="text"
+				name="username"
+				placeholder="Username">
+			<input type="password"
+				name="password"
+				placeholder="Password">
+			<button type="submit">submit</button>
+		</form>
+	</div>
+
+	<div>
+		<h1>Handle POST Request</h1>
+		<form method="POST"
+			action="{{ url_for('handle_post') }}">
+			<input type="text"
+				name="username"
+				placeholder="Username">
+			<input type="password"
+				name="password"
+				placeholder="Password">
+			<button type="submit">submit</button>
+		</form>
+	</div>
+</body>
+
+</html>
