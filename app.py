@@ -11,6 +11,7 @@ load_dotenv()
 
 # Flask app configurations
 app = Flask(__name__)
+app.config['STATIC_FOLDER'] = 'static'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/model'
 mongo = PyMongo(app)
 
