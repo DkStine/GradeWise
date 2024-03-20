@@ -30,11 +30,10 @@ pdf_path = r"./essayPdf/Course Plan Eng Phy.pdf"
 
 
 pages =convert_from_path(pdf_path = pdf_path, poppler_path = poppler_path)
-import os 
 #path to savdthe output in.
 saving_folder = r"./essayImages/"
 
-#to countthe number of pages
+#to count the number of pages
 counter = 1
 #iterateover all the pages of the pdf
 for page in pages:
@@ -58,36 +57,19 @@ essayText = ""
 def view_form():
 	return render_template('index.html')
 
-# GET method logic
-@app.route('/handle_get', methods=['GET'])
-def handle_get():
-	if request.method == 'GET':
-		username = request.args['username']
-		password = request.args['password']
-		print(username, password)
-		if username in users and users[username] == password:
-			return '<h1>Welcome!!!</h1>'
-		else:
-			return '<h1>invalid credentials!</h1>'
-	else:
-		return render_template('login.html')
-
-# POST method logic
-@app.route('/handle_post', methods=['POST'])
-def handle_post():
+# Login logic
+@app.route('/logic', methods=['POST'])
+def login():
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
-		print(username, password)
 		if username in users and users[username] == password:
-			return '<h1>Welcome!!!</h1>'
+			return redirect(url_for('input'))
 		else:
-			return '<h1>invalid credentials!</h1>'
-	else:
-		return render_template('login.html')
+			return '<p>Login failed</p>'
 
-@app.route('/handle_upload', methods = ['POST'])
-def handle_upload():
+@app.route('/input', methods = ['POST'])
+def input():
 	if 'pdfFile' in request.files:
 	# 	pdfFile = request.files['pdfFile']
 	# 	mongo.save_file(pdfFile.filename, pdfFile)
