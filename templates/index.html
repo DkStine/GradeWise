@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <style>
             body {
                 background-color: black;
@@ -31,6 +31,6 @@
                 <input type="submit" value="login" class="btn">
             </form>
     </div>
-<script src="Login.js"></script>
+<script src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
 </html>
