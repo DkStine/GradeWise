@@ -1,5 +1,7 @@
 # Imports
 import google.generativeai as genai
+from PIL import Image
+import pytesseract
 import pathlib
 import textwrap
 import os
@@ -22,24 +24,33 @@ genai.configure(api_key = GOOGLE_API_KEY)
 # Gemini model selection
 model = genai.GenerativeModel('gemini-pro')
 
-# --> PDF2Image
-poppler_path = r"C:/Users/91993/Downloads/Programs/Release-24.02.0-0/poppler-24.02.0/Library/bin"
+# # --> PDF2Image
+# poppler_path = r"C:/Users/91993/Downloads/Programs/Release-24.02.0-0/poppler-24.02.0/Library/bin"
 
-#path of pdf 
-pdf_path = r"./essayPdf/Course Plan Eng Phy.pdf"
+# #path of pdf 
+# pdf_path = r"./essayPdf/Course Plan Eng Phy.pdf"
 
 
-pages =convert_from_path(pdf_path = pdf_path, poppler_path = poppler_path)
-#path to savdthe output in.
-saving_folder = r"./essayImages/"
+# pages =convert_from_path(pdf_path = pdf_path, poppler_path = poppler_path)
+# #path to savdthe output in.
+# saving_folder = r"./essayImages/"
 
-#to count the number of pages
-counter = 1
-#iterateover all the pages of the pdf
-for page in pages:
-    img_name = f"Page_0{counter}.png"
-    page.save(os.path.join(saving_folder,img_name), "PNG")
-    counter += 1
+# #to count the number of pages
+# counter = 1
+# #iterateover all the pages of the pdf
+# for page in pages:
+#     img_name = f"Page_0{counter}.png"
+#     page.save(os.path.join(saving_folder,img_name), "PNG")
+#     counter += 1
+
+def pdfToText(pdfPath):
+		with Image.open(pdfPath) as img:
+			width, height = img.size
+			for i in range(height // width + 1):
+				page = img.crop((0, i * width, width, i * width))
+				page.save('./essayImages/{}.png'.format(i))
+
+		text = ""
 
 # Set a secret key for encrypting session data
 app.secret_key = 'my_secret_key'
@@ -58,7 +69,7 @@ def view_form():
 	return render_template('index.html')
 
 # Login logic
-@app.route('/logic', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
 	if request.method == 'POST':
 		username = request.form['username']
@@ -70,20 +81,20 @@ def login():
 
 @app.route('/input', methods = ['POST'])
 def input():
-	if 'pdfFile' in request.files:
-	# 	pdfFile = request.files['pdfFile']
-	# 	mongo.save_file(pdfFile.filename, pdfFile)
-	# 	mongo.db.assignment.insert_one({'username' : request.form.get('username'), 'pdfFileName' : pdfFile.filename})
-		uploaded_file = request.files['pdfFile']
-		if uploaded_file.filename != '':
-			uploaded_file.save('./essayPdf/', uploaded_file.filename)
+	if request.method == 'POST':
+			uploaded_file = request.files['pdfFile']
+			pdf_path = '/tmp/' + uploaded_file.filename
+			with open(pdf_path, 'wb') as file:
+				file.write(uploaded_file.read())
+			
+			essayText = pdfToText(pdf_path)
 
 
-	essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
-	response = model.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + "Technology" + essayText)
-	with open(r'./analysisText/output.txt', 'w+') as fp:
-		fp.write(response.text)
-	return 'Done!'
+	# essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
+	# response = model.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + "Technology" + essayText)
+	# with open(r'./analysisText/output.txt', 'w+') as fp:
+	# 	fp.write(response.text)
+	# return 'Done!'
 
 
 if __name__ == '__main__':
