@@ -23,12 +23,6 @@ body {
   min-height: 100vh;
 }
 
-.button.success {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
-  border: 2px solid #4CAF50; /* Green border to match */
-}
-
 .container {
   position: relative;
   width: 50vw;
