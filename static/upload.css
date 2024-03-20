@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  width: 40vw;
+  height: 70vh;
+  background-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: 5px 5px #000000;
+  padding: 20px;
+}
+
+.text-container, .image-container, .form {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Align items to the center vertically */
+  width: 100%;
+}
+
+.text {
+  color: #ffffff;
+  font-size: 4vw; /* Adjusted for better scaling */
+  text-align: center; /* Ensure text is centered */
+}
+
+.image {
+  width: 40%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Ensure there's some space above the button */
+}
+
+.button:hover {
+  background-color: #bdbdbd;
+  border-color: #000000;
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    width: 80vw; /* Adjust width for smaller screens */
+    height: auto; /* Allow container height to adjust based on content */
+  }
+
+  .text {
+    font-size: 5vw; /* Increase size slightly for better legibility on small screens */
+  }
+}
