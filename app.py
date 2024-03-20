@@ -27,7 +27,7 @@ visionModel = genai.GenerativeModel('gemini-pro-vision')
 
 # --> PDF2Image
 
-#path of pdf 
+# path of pdf 
 # pdfPath = r"./essayPdf/Course Plan Eng Phy.pdf"
 
 def pdfToText(pdfPath):
@@ -51,9 +51,24 @@ def pdfToText(pdfPath):
 		text += textResponse.text
 		counter += 1
 
-	print(text)
+	return text
 
-pdfToText("./essayPdf/Course Plan Eng Phy.pdf")
+def analyseText(text, refStr):
+	response = textModel.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + refStr + " and the text is "+ text)
+	# with open(r'./analysisText/output.txt', 'w+') as fp:
+	# 	fp.write(response.text)
+
+	return response.text
+
+
+
+essayText = pdfToText("./essayPdf/OOPs assgn.pdf")
+analysed = analyseText(essayText)
+print(analysed)
+
+# Sample implementation of LLM API to generate analysis of text
+# essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
+
 # path = os.path.join(r"./essayImages/", "Page_1.png")
 # img = Image.open(path)
 # textResponse = visionModel.generate_content(["Extract all the text that you see in this image, do not add new things, be accurate.", img], stream=True)
@@ -69,8 +84,6 @@ users = {
 	'kunal': '1234',
 	'user2': 'password2'
 }
-
-essayText = ""
 
 # To render a login form 
 @app.route('/')
@@ -88,11 +101,6 @@ def login():
 		else:
 			return '<p>Login failed</p>'
 
-# Sample implementation of LLM API to generate analysis of text
-essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
-response = textModel.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + "Technology" + essayText)
-with open(r'./analysisText/output.txt', 'w+') as fp:
-	fp.write(response.text)
 
 @app.route('/input', methods = ['POST'])
 def input():
