@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(data); // For debugging purposes
             if (data.success) {
                 // Redirect to the upload page if login is successful
-                window.location.href = 'upload.html'; // Change this URL to your upload page's URL
+                window.location.href = '/upload'; // Change this URL to your upload page's URL
             } else {
                 // Alert the user if login failed
                 alert('Login failed: ' + data.message);
