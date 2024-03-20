@@ -6,78 +6,47 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .container {
   display: flex;
-  flex-direction: row;
-  width: 60vw;
-  height: 60vh;
+  flex-direction: column; /* Align children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  width: 40vw;
+  height: 70vh;
   background-color: rgb(0, 0, 0);
   border-radius: 20px;
   border: 2px solid rgb(255, 255, 255);
   box-shadow: 5px 5px #000000;
   padding: 20px;
-  position: relative;
 }
 
-.text-container {
-  width: 25%;
+.text-container, .image-container, .form {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  position: absolute;
-  top: 20px; /* Adjust top position as needed */
-  right: 20px; /* Move text container all the way to the right */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Align items to the center vertically */
+  width: 100%;
 }
 
 .text {
   color: #ffffff;
-  font-size: 6vw; /* Percentage-based font size */
-  margin-right: 20%;
-}
-
-.image-container {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 4vw; /* Adjusted for better scaling */
+  text-align: center; /* Ensure text is centered */
 }
 
 .image {
-  width: 80%;
+  width: 40%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 8px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 50%;
-  max-width: 400px;
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto; /* Push buttons to the bottom */
-  margin-right: 20px; /* Add margin to the right */
 }
 
 .button {
@@ -85,57 +54,24 @@ body {
   font-size: 16px;
   color: #000000;
   background-color: #ffffff;
-  border: 2px solid transparent; /* Add a transparent border */
+  border: 2px solid transparent;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transition the border-color */
+  margin-top: 20px; /* Ensure there's some space above the button */
 }
 
 .button:hover {
   background-color: #bdbdbd;
-  color: #000000;
-  border-color: #000000; /* Change the border color instead of border */
+  border-color: #000000;
 }
 
-.file-input {
-  margin: 10px;
-  font-size: 16px;
-}
-
-/* Responsive media queries */
 @media only screen and (max-width: 900px) {
   .container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .text-container {
-    width: 100%;
-    position: static;
-    margin-bottom: 20px;
-    text-align: right; /* Align text to the right */
+    width: 80vw; /* Adjust width for smaller screens */
+    height: auto; /* Allow container height to adjust based on content */
   }
 
   .text {
-    text-align: right;margin-right: 10px;
-    font-size: 6vw; /* Percentage-based font size */
-  }
-
-  .image-container,
-  .form {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .button-container {
-    align-items: flex-end; /* Align buttons from the right */
-    margin-top: auto; /* Push buttons to the bottom */
-    margin-right: 20px; /* Add margin to the right */
-  }
-
-  .button {
-    margin: 10px 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    font-size: 5vw; /* Increase size slightly for better legibility on small screens */
   }
 }
