@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+            body {
+                background-color: black;
+                color: white; /* Ensures text is visible */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+</head>
+<body>
+    <h1 class="header-title">GradeWise</h1>
+    <div class="container">
+        <div class="signup-login">
+            <form action="/login" method="post" class="login-form" id="loginForm">
+                <h2 class="title">Login</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <!-- Add name and id attributes for easier handling with JS and Flask -->
+                    <input type="text" placeholder="Username" name="username" id="username">
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" name="password" id="password">
+                    <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                </div>
+                <input type="submit" value="login" class="btn">
+            </form>
+    </div>
+<script src="Login.js"></script>
+</body>
+</html>
