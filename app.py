@@ -55,7 +55,7 @@ essayText = ""
 # To render a login form 
 @app.route('/')
 def view_form():
-	return render_template('login.html')
+	return render_template('index.html')
 
 # GET method logic
 @app.route('/handle_get', methods=['GET'])
