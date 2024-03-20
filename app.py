@@ -125,15 +125,15 @@ def filterFields(analysedText, pdfPath):
 	return analysis_data
 
 
-pdfPath = r"./essayPdf/IndianEconomics-23WU0102100.pdf"
-essayText = pdfToText(pdfPath)
-analysed = analyseText(essayText, "Indian Economics")
-# Generate HTML output
-print(analysed)
-html_output = generateHTMLOutput(filterFields(analysed, pdfPath))
-# Write HTML output to a file
-with open("./outputHTML/student_marks.html", "w") as file:
-    file.write(html_output)
+# pdfPath = r"./essayPdf/IndianEconomics-23WU0102100.pdf"
+# essayText = pdfToText(pdfPath)
+# analysed = analyseText(essayText, "Indian Economics")
+# # Generate HTML output
+# print(analysed)
+# html_output = generateHTMLOutput(filterFields(analysed, pdfPath))
+# # Write HTML output to a file
+# with open("./outputHTML/student_marks.html", "w") as file:
+#     file.write(html_output)
 
 # Sample implementation of LLM API to generate analysis of text
 # essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
@@ -171,22 +171,29 @@ def login():
 			return '<p>Login failed</p>'
 
 
-@app.route('/input', methods = ['POST'])
-def input():
+@app.route('/upload', methods = ['POST'])
+def upload():
 	if request.method == 'POST':
-			# uploaded_file = request.files['pdfFile']
-			# pdfPath = '/tmp/' + uploaded_file.filename
-			# with open(pdfPath, 'wb') as file:
-			# 	file.write(uploaded_file.read())
+			uploaded_file = request.files['pdfFile']
+			pdfPath = '/tmp/' + uploaded_file.filename
+			with open(pdfPath, 'wb') as file:
+				file.write(uploaded_file.read())
+
+			essayText = pdfToText(pdfPath)
+			analysed = analyseText(essayText, "Indian Economics")
+			html_output = generateHTMLOutput(filterFields(analysed, pdfPath))
+			with open("./outputHTML/student_marks.html", "w") as file:
+				file.write(html_output)
+
 			
-			# essayText = pdfToText(pdfPath)
+			
 			# <---> Logic for accepting pdf input and converting it into text, that is, essayText would hold a String
 
-		essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
-		response = textModel.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + "Technology" + essayText)
-		with open(r'./analysisText/output.txt', 'w+') as fp:
-			fp.write(response.text)
-		return 'Done!'
+		# essayText = "Technology has become an integral part of our lives, transforming the way we live, work, and communicate. From smartphones and laptops to smart homes and self-driving cars, technology has made our lives more convenient and efficient. It has also opened up new opportunities for innovation, creativity, and economic growth. However, as with any powerful tool, technology also presents challenges, such as privacy concerns, cybersecurity threats, and the potential for job displacement. As we continue to navigate this rapidly evolving landscape, it is important to approach technology with a critical and informed perspective, considering both its benefits and its potential risks."
+		# response = textModel.generate_content("Given is an essay written by a student, analyze it and give constructive feedback and score out it out of 10 marks. The topic is: " + "Technology" + essayText)
+		# with open(r'./analysisText/output.txt', 'w+') as fp:
+		# 	fp.write(response.text)
+		# return 'Done!'
 	
 
 
