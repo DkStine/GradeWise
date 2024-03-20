@@ -166,7 +166,7 @@ def login():
 		username = request.form['username']
 		password = request.form['password']
 		if username in users and users[username] == password:
-			return redirect(url_for('input'))
+			return redirect(url_for('upload'))
 		else:
 			return '<p>Login failed</p>'
 
