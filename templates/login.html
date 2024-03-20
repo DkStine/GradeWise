@@ -1,51 +1,36 @@
-<!-- templates/login.html-->
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Handling of http get and post request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Login</title>
+    <link rel="stylesheet" href="login.css">
     <style>
-    div {
-        width: 400px;
-        border: 1px solid green;
-        padding: 10px;
-        margin-bottom: 5px;
-    }
+            body {
+                background-color: black;
+                color: white; /* Ensures text is visible */
+        }
     </style>
 </head>
-
 <body>
-    <div>
-    <h1>Handle GET Request</h1>
-    <form method="GET" action="{{ url_for('handle_get') }}">
-        <input type="text" name="username" placeholder="Username" />
-        <inpt type="password" name="password" placeholder="Password" />
-        <button type="submit">submit</button>
-    </form>
+    <h1 class="header-title">GradeWise</h1>
+    <div class="container">
+        <div class="signup-login">
+            <form action="/login" method="post" class="login-form" id="loginForm">
+                <h2 class="title">Login</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <!-- Add name and id attributes for easier handling with JS and Flask -->
+                    <input type="text" placeholder="Username" name="username" id="username">
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <!-- Add name and id attributes for easier handling with JS and Flask -->
+                    <input type="password" placeholder="Password" name="password" id="password">
+                </div>
+                <input type="submit" value="login" class="btn">
+            </form>
     </div>
-
-    <div>
-    <h1>Handle POST Request</h1>
-    <form method="POST" action="{{ url_for('handle_post') }}">
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<button type="submit">submit</button>
-		</form>
-    </div>
-	
-    <div id="uploadDiv">
-		<h1>Upload PDF files</h1>
-    <form action="{{ url_for('handle_upload') }}" method="POST" enctype="multipart/form-data">
-        <label for="pdfFile">Upload PDF:</label>
-        <input
-        type="file"
-        id="pdfFile"
-        name="pdfFile"
-        accept=".pdf"
-        /><br /><br />
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" /><br /><br />
-        <input type="submit" value="Upload" />
-    </form>
-    </div>
+<script src="Login.js"></script>
 </body>
 </html>
