@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Login</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <style>
             body {
@@ -11,6 +11,8 @@
                 color: white; /* Ensures text is visible */
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
 </head>
 <body>
     <h1 class="header-title">GradeWise</h1>
@@ -25,8 +27,8 @@
                 </div>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
-                    <!-- Add name and id attributes for easier handling with JS and Flask -->
                     <input type="password" placeholder="Password" name="password" id="password">
+                    <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                 </div>
                 <input type="submit" value="login" class="btn">
             </form>
