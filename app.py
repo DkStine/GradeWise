@@ -7,7 +7,7 @@ import textwrap
 import os
 import re
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 from flask_pymongo import PyMongo
 from pdf2image import convert_from_path
 load_dotenv()
@@ -150,26 +150,28 @@ app.secret_key = 'my_secret_key'
 
 # dictionary to store user and password
 users = {
-	'kunal': '1234',
+	'user1': 'password1',
 	'user2': 'password2'
 }
 
 # To render a login form 
 @app.route('/')
-def view_form():
+def home():
 	return render_template('index.html')
 
 # Login logic
 @app.route('/login', methods=['POST'])
 def login():
-	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
 		if username in users and users[username] == password:
 			return redirect(url_for('upload'))
 		else:
-			return '<p>Login failed</p>'
+			return render_template('index.html', message="Login failed. Please check your credentials and try again.")
 
+@app.route('/upload')
+def upload_form():
+    return render_template('upload.html')
 
 @app.route('/upload', methods = ['POST'])
 def upload():
