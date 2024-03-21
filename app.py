@@ -5,15 +5,12 @@ import os
 import re
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify
-from flask_pymongo import PyMongo
 from pdf2image import convert_from_path
 load_dotenv()
 
 # Flask app configurations
 app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/model'
-mongo = PyMongo(app)
 
 # Gemini_API_KEY config
 GOOGLE_API_KEY = os.getenv("API_KEY")
