@@ -58,7 +58,37 @@ def analyseText(text, refStr):
 
 	return response.text
 
+def preprocessFeedback(feedback):
+    # Check and remove the "Score: Marks:" part if it exists at the end of the feedback
+    score_prefix = "*Score: Marks:"
+    if score_prefix in feedback:
+        feedback = feedback[:feedback.rfind(score_prefix)].strip()
+
+    # Splitting the feedback into parts for formatting
+    parts = feedback.split("*")
+    cleaned_parts = [part.strip() for part in parts if part]
+
+    # Constructing an HTML list for the feedback
+    feedback_html = "<ul>"
+    for part in cleaned_parts:
+        if part:  # Ensure part is not empty
+            # Check if part is a title like 'Analysis:', 'Constructive Feedback:'
+            if part.endswith(":"):
+                feedback_html += f"<li><strong>{part}</strong></li>"
+            else:
+                feedback_html += f"<li>{part}</li>"
+    feedback_html += "</ul>"
+    return feedback_html
+
 def generateHTMLOutput(analysedData):
+    # Assuming analysedData is a single string formatted as "Roll Number, Marks Obtained, Feedback"
+    parts = analysedData.split(',')
+    roll_number = parts[0].strip()
+    marks_obtained = parts[1].strip()
+    feedback = ','.join(parts[2:]).strip()  # Join back in case feedback contains commas
+    
+    formatted_feedback = preprocessFeedback(feedback)
+    
     html_content = f'''
     <!DOCTYPE html>
     <html>
@@ -79,6 +109,19 @@ def generateHTMLOutput(analysedData):
     th {{
       background-color: #f2f2f2;
     }}
+
+    ul {{
+      list-style-type: none;
+      padding: 0;
+    }}
+
+    ul li {{
+      padding: 2px;
+    }}
+
+    ul li strong {{
+      font-weight: bold;
+    }}
     </style>
     </head>
     <body>
@@ -91,7 +134,11 @@ def generateHTMLOutput(analysedData):
         <th>Marks Obtained</th>
         <th>Remarks or Comments</th>
       </tr>
-      {analysedData}
+      <tr>
+        <td>{roll_number}</td>
+        <td>{marks_obtained}</td>
+        <td>{formatted_feedback}</td>
+      </tr>
     </table>
 
     </body>
@@ -110,14 +157,7 @@ def filterFields(analysedText, pdfPath):
 		marks = matchMarks[-1]
 	review = re.sub(patternMarks, "", analysedText)
 
-	analysis_data = f'''
-	<tr>
-	<td>{roll_number}</td>
-	<td>{marks}</td>
-	<td>{review}</td>
-	
-	</tr>
-	'''
+	analysis_data = f"{roll_number}, {marks}, {review}"
 
 	return analysis_data
 
@@ -196,9 +236,6 @@ def upload():
 		# with open(r'./analysisText/output.txt', 'w+') as fp:
 		# 	fp.write(response.text)
 		# return 'Done!'
-	
-
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
