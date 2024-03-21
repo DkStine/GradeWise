@@ -236,6 +236,17 @@ def upload():
 		# with open(r'./analysisText/output.txt', 'w+') as fp:
 		# 	fp.write(response.text)
 		# return 'Done!'
+				
+@app.route('/path_to_your_html')
+def serve_html():
+    # Logic to serve your HTML content
+    # For example, reading from a file and returning its contents
+    with open('./outputHTML/student_marks.html', 'r') as file:
+        html_content = file.read()
+    return html_content
+
+
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
