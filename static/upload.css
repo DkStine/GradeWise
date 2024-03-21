@@ -5,12 +5,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.button.success {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
-  border: 2px solid #4CAF50; /* Green border to match */
-}
-
 body {
   display: flex;
   justify-content: center;
@@ -66,12 +60,53 @@ body {
   margin-top: 20px; /* Ensure there's some space above the button */
 }
 
+.button.success {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: 2px solid #4CAF50; /* Green border to match */
+}
+
 .button:hover {
-  background-color: #bdbdbd;
-  border-color: #000000;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: 2px solid #4CAF50; /* Green border to match */
+}
+
+.text-prompt{
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Ensure there's some space above the button */
 }
 
 @media only screen and (max-width: 900px) {
+  .container {
+    width: 80vw; /* Adjust width for smaller screens */
+    height: auto; /* Allow container height to adjust based on content */
+  }
+
+  .text {
+    font-size: 5vw; /* Increase size slightly for better legibility on small screens */
+  }
+}
+
+
+@media only screen and (max-width: 1080px) {
+  .container {
+    width: 80vw; /* Adjust width for smaller screens */
+    height: auto; /* Allow container height to adjust based on content */
+  }
+
+  .text {
+    font-size: 5vw; /* Increase size slightly for better legibility on small screens */
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .container {
     width: 80vw; /* Adjust width for smaller screens */
     height: auto; /* Allow container height to adjust based on content */

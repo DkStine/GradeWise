@@ -14,15 +14,18 @@
             </p>
         </div>
         <div class="image-container">
-            <img class="image" src="../assets/upload (2).svg" alt="Cover Image">
+            <img class="image" src="{{ url_for('static', filename='upload.svg') }}" alt="Cover Image">
         </div>
         <form class="form" id="uploadForm" enctype="multipart/form-data">
             <div class="button-container">
-                <input type="file" name="files[]" class="file-input button">
+                <input type="file" name="pdfFile" class="file-input button">
+                <input type="text" name = "prompt" class="text-prompt" placeholder="Specify a topic">
                 <input type="submit" value="Upload Documents" class="button">
+                
             </div>
         </form>
     </div>
+    <script src="upload.js"></script>
     <script src="{{ url_for('static', filename='upload.js') }}"></script>
 </body>
 </html>
