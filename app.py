@@ -177,12 +177,15 @@ def upload_form():
 def upload():
 	if request.method == 'POST':
 			uploaded_file = request.files['pdfFile']
-			pdfPath = '/tmp/' + uploaded_file.filename
+			print('file uploaded')
+			pdfPath = './temp/' + uploaded_file.filename
 			with open(pdfPath, 'wb') as file:
 				file.write(uploaded_file.read())
 
+			prompt = request.form['prompt']
+
 			essayText = pdfToText(pdfPath)
-			analysed = analyseText(essayText, "Indian Economics")
+			analysed = analyseText(essayText, prompt)
 			html_output = generateHTMLOutput(filterFields(analysed, pdfPath))
 			with open("./outputHTML/student_marks.html", "w") as file:
 				file.write(html_output)
