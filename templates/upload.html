@@ -19,12 +19,15 @@
         <form class="form" id="uploadForm" enctype="multipart/form-data">
             <div class="button-container">
                 <input type="file" name="pdfFile" class="file-input button">
-                <input type="text" name = "prompt" class="text-prompt" placeholder="Specify a topic">
+                <input type="text" class="text-prompt" placeholder="Specify a topic">
                 <input type="submit" value="Upload Documents" class="button">
-                
             </div>
         </form>
+        <br><br>
     </div>
+    <!--Display File information-->
+    <div class="display-area"></div>
+    <div id="download-btn" class="button">Download</div>
     <script src="upload.js"></script>
     <script src="{{ url_for('static', filename='upload.js') }}"></script>
 </body>

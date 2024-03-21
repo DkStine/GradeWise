@@ -6,21 +6,22 @@
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   padding: 20px;
+  margin-top: 30px;
+  margin-left: 10vw;
+  margin-right: 10vw;
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
 }
 
 .container {
   display: flex;
+  margin-left: 20vw;
   flex-direction: column; /* Align children vertically */
   justify-content: center; /* Center children vertically */
   align-items: center; /* Center children horizontally */
-  width: 40vw;
+  width: 35vw;
   height: 70vh;
   background-color: rgb(0, 0, 0);
   border-radius: 20px;
@@ -49,7 +50,12 @@ body {
   border-radius: 8px;
 }
 
+
+
 .button {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
   padding: 10px 20px;
   font-size: 16px;
   color: #000000;
@@ -61,9 +67,9 @@ body {
 }
 
 .button.success {
-  background-color: #4CAF50; /* Green background */
+  background-color: #444b44; /* Green background */
   color: white; /* White text */
-  border: 2px solid #4CAF50; /* Green border to match */
+  border: 2px solid #444b44; /* Green border to match */
 }
 
 .button:hover {
@@ -95,6 +101,19 @@ body {
 }
 
 
+.display-area {
+  align-items: center; /* Center text horizontally */
+  margin-left: 10px;
+  margin-right: 30px;
+  height: auto;
+  width: 100%;
+  margin-top: 100px;
+  border-color: #000000;
+  border-style: solid; /* Specify the style explicitly */
+  border-width: 1px; /* Adjust border width as needed */
+}
+
+
 @media only screen and (max-width: 1080px) {
   .container {
     width: 80vw; /* Adjust width for smaller screens */
@@ -115,4 +134,13 @@ body {
   .text {
     font-size: 5vw; /* Increase size slightly for better legibility on small screens */
   }
+}
+
+#download-btn{
+  margin-left: 38%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  width: 300px;
+  height: 40px;
 }
