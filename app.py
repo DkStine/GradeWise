@@ -1,9 +1,6 @@
 # Imports
 import google.generativeai as genai
 from PIL import Image
-import pytesseract
-import pathlib
-import textwrap
 import os
 import re
 from dotenv import load_dotenv
