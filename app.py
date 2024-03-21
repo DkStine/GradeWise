@@ -4,7 +4,7 @@ from PIL import Image
 import os
 import re
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, session, url_for, jsonify
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify, send_file
 from pdf2image import convert_from_path
 load_dotenv()
 
@@ -234,13 +234,24 @@ def upload():
 		# 	fp.write(response.text)
 		# return 'Done!'
 				
-@app.route('/path_to_your_html')
-def serve_html():
-    # Logic to serve your HTML content
-    # For example, reading from a file and returning its contents
-    with open('./outputHTML/student_marks.html', 'r') as file:
-        html_content = file.read()
-    return html_content
+# @app.route('/path_to_your_html')
+# def serve_html():
+#     # Logic to serve your HTML content
+#     # For example, reading from a file and returning its contents
+#     with open('./outputHTML/student_marks.html', 'r') as file:
+#         html_content = file.read()
+#     return html_content
+
+@app.route('/serveHTML', methods=['POST'])
+def upload_file():
+    # Your existing upload logic...
+    
+    # After processing and generating the HTML file
+    path_to_html_file = './outputHTML/student_marks.html'
+    # Assuming the HTML file is ready and stored at path_to_html_file
+    
+    # Return the file as an attachment to trigger a download
+    return send_file(path_to_html_file, as_attachment=True, download_name='YourDownload.html')
 
 
 
