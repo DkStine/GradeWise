@@ -26,7 +26,7 @@ visionModel = genai.GenerativeModel('gemini-pro-vision')
 # pdfPath = r"./essayPdf/Course Plan Eng Phy.pdf"
 
 def pdfToText(pdfPath):
-	poppler_path = r"C:/Users/91993/Downloads/Programs/Release-24.02.0-0/poppler-24.02.0/Library/bin"
+	poppler_path = os.getenv("PopplerPath")
 	pages =convert_from_path(pdf_path= pdfPath, poppler_path = poppler_path)
 	#path to save the output in
 	saving_folder = r"./essayImages/"
