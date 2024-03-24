@@ -242,16 +242,6 @@ def upload():
 #         html_content = file.read()
 #     return html_content
 
-@app.route('/serveHTML', methods=['POST'])
-def upload_file():
-    # Your existing upload logic...
-    
-    # After processing and generating the HTML file
-    path_to_html_file = './outputHTML/student_marks.html'
-    # Assuming the HTML file is ready and stored at path_to_html_file
-    
-    # Return the file as an attachment to trigger a download
-    return send_file(path_to_html_file, as_attachment=True, download_name='YourDownload.html')
 
 
 
