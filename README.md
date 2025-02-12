@@ -48,7 +48,7 @@ python app.py
 
 * Serving CSV File to Web App:
    - Objective: Enable download of CSV file through web interface.
-   - Flask Route for Download: Create route for serving CSV file, set appropriate headers.
+   - Flask Route for Download: Create route for serving CSV file set appropriate headers.
 
 * Implementation Overview:
     - Front-End to Flask: JavaScript sends uploaded files to Flask.
